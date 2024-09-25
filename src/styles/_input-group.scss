@@ -1,0 +1,92 @@
+// Input groups
+
+$input-group-addon-color:               $input-placeholder-color !default;
+$input-group-addon-bg:                  $input-bg !default;
+$input-group-addon-border-color:        $input-border-color !default;
+
+$input-group-addon-focus-color:               $input-focus-color !default;
+$input-group-addon-focus-bg:                  $input-focus-bg !default;
+$input-group-addon-focus-border-color:        $input-focus-border-color !default;
+
+$input-color:                           $gray-600 !default;
+$input-border-color:                    #cad1d7 !default;
+$input-border-width:                    $input-btn-border-width !default;
+$input-box-shadow:                      none !default; // 0 1px 3px 0 $gray-400 !default;
+
+$transition-base:             all .15s ease !default;
+$transition-fade:             opacity .15s linear !default;
+$transition-collapse:         height .35s ease !default;
+
+$input-transition:                      all .2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+$input-alternative-box-shadow:          0 1px 3px rgba(50,50,93,.15), 0 1px 0 rgba(0,0,0,.02);
+$input-focus-alternative-box-shadow:    0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(0,0,0,.08);
+
+$input-focus-bg:                        $white !default;
+$input-focus-border-color:              rgba(50,151,211,.25);
+$input-focus-color:                     $input-color !default;
+$input-focus-width:                     0 !default;
+$input-focus-box-shadow:                none !default; //0 1px 3px 0 $gray-500 !default;
+
+.input-group {
+	box-shadow: $input-box-shadow;
+	border-radius: $input-border-radius;
+	transition: $transition-base;
+
+	.form-control {
+		box-shadow: none;
+
+		&:not(:first-child) {
+		    border-left: 0;
+		    padding-left: 0;
+		}
+		&:not(:last-child) {
+			border-right: 0;
+			padding-right: 0;
+		}
+		&:focus {
+			box-shadow: none;
+		}
+	}
+}
+
+.input-group-text {
+    transition: $input-transition;
+}
+
+.input-group-alternative {
+    box-shadow: $input-alternative-box-shadow;
+    border: 0;
+    transition: box-shadow .15s ease;
+
+    .form-control,
+    .input-group-text {
+        border: 0;
+        box-shadow: none;
+    }
+}
+
+.focused {
+	.input-group-alternative {
+        box-shadow: $input-focus-alternative-box-shadow !important;
+    }
+}
+
+
+// .focus class is applied dinamycally from theme.js
+
+.focused {
+	.input-group {
+		box-shadow: $input-focus-box-shadow;
+	}
+
+	.input-group-text {
+	    color: $input-group-addon-focus-color;
+	    background-color: $input-group-addon-focus-bg;
+	    border-color: $input-group-addon-focus-border-color;
+	}
+
+	.form-control {
+		border-color: $input-group-addon-focus-border-color;
+	}
+}

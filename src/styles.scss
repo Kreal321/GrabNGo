@@ -1,0 +1,25 @@
+@import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '@fortawesome/fontawesome-free/scss/solid.scss';
+@import '@fortawesome/fontawesome-free/scss/regular.scss';
+@import '@fortawesome/fontawesome-free/scss/brands.scss';
+
+$primary: #6200EE;
+
+$nav-pills-link-active-bgc: #6200EE;
+$nav-pills-link-active-color: #FFF;
+
+$badges: (
+  (
+    'primary': (
+      'background-color': rgb(233, 223, 246),
+      'text-color': rgb(92, 44, 160),
+      'icon-color': rgb(115, 55, 200),
+      'border-color': rgb(199, 214, 240),
+    )
+  )
+);
+
+@import 'mdb-angular-ui-kit/assets/scss/mdb.scss';
+
+@import 'styles/input-group';
+@import 'styles/text';
