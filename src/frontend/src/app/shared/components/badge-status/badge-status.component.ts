@@ -32,6 +32,9 @@ export class BadgeStatusComponent implements OnChanges{
       case Status.DISABLED:
         this.color = 'secondary';
         break;
+      case Status.VERIFYING:
+        this.color = 'warning';
+        break;
     }
   }
 }

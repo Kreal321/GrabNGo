@@ -8,6 +8,7 @@ import { ModalProwlarrSettingsComponent } from "../modal-prowlarr-settings/modal
 import { AlertComponent } from "../../../../shared/components/alert/alert.component";
 import { MdbNotificationRef, MdbNotificationService } from "mdb-angular-ui-kit/notification";
 import { DataResponse } from "../../../../core/models/dataResponse.model";
+import { ModalAlistSettingsComponent } from "../modal-alist-settings/modal-alist-settings.component";
 
 @Component({
   selector: 'app-card-plugin-settings',
@@ -17,7 +18,6 @@ import { DataResponse } from "../../../../core/models/dataResponse.model";
 export class CardPluginSettingsComponent implements OnChanges{
 
   plugins: Plugin[] = [];
-  prowlarrModalRef: MdbModalRef<ModalProwlarrSettingsComponent> | null = null;
 
 
   constructor(
@@ -64,14 +64,26 @@ export class CardPluginSettingsComponent implements OnChanges{
   openPluginConfig(plugin: Plugin) {
     switch (plugin.name) {
       case 'Prowlarr':
-        this.prowlarrModalRef = this.modalService.open(ModalProwlarrSettingsComponent, {
+        this.modalService.open(ModalProwlarrSettingsComponent, {
           modalClass: 'modal-dialog-centered',
           ignoreBackdropClick: true,
           data: {
             prowlarr: {...plugin}
           }
+        }).onClose.subscribe((message: any) => {
+          if (message === 'updated') {
+            this.loadPlugins();
+          }
         });
-        this.prowlarrModalRef.onClose.subscribe((message: any) => {
+        break;
+      case 'AList':
+        this.modalService.open(ModalAlistSettingsComponent, {
+          modalClass: 'modal-dialog-centered',
+          ignoreBackdropClick: true,
+          data: {
+            alist: {...plugin}
+          }
+        }).onClose.subscribe((message: any) => {
           if (message === 'updated') {
             this.loadPlugins();
           }

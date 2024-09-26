@@ -22,15 +22,17 @@ public class ProwlarrService {
         this.pluginService = pluginService;
     }
 
-    public void verifyPlugin() {
-        Plugin plugin = this.getConfig();
-        plugin.setStatus(Status.VERIFYING);
-        this.pluginService.save(plugin);
-        ProwlarrSystemStatus status = this.getSystemStatus();
-        plugin.setMessage("System version: " + status.getVersion() + ", started at: " + status.getStartTime());
-        plugin.setStatus(Status.RUNNING);
-        this.pluginService.save(plugin);
+    private Plugin getConfig() {
+        Plugin config = this.pluginService.findByName("Prowlarr").orElseThrow(
+                () -> new BadRequestException("Prowlarr plugin not found")
+        );
+        if (config.getStatus() == Status.ERROR) {
+            throw new BadRequestException("Prowlarr plugin configuration error");
+        }
+        return config;
     }
+
+    // API Requests
 
     public ProwlarrSystemStatus getSystemStatus() {
         Plugin config = this.getConfig();
@@ -49,13 +51,17 @@ public class ProwlarrService {
         return this.restTemplate.getForObject(uri.toUri(), ProwlarrSearchResult[].class);
     }
 
-    private Plugin getConfig() {
-        Plugin config = this.pluginService.findByName("Prowlarr").orElseThrow(
-                () -> new BadRequestException("Prowlarr plugin not found")
-        );
-        if (config.getStatus() == Status.ERROR) {
-            throw new BadRequestException("Prowlarr plugin configuration error");
-        }
-        return config;
+    // Actions
+
+    public void verifyPlugin() {
+        Plugin plugin = this.getConfig();
+        plugin.setStatus(Status.VERIFYING);
+        this.pluginService.save(plugin);
+        ProwlarrSystemStatus status = this.getSystemStatus();
+        plugin.setMessage("System version: " + status.getVersion() + ". Started at: " + status.getStartTime());
+        plugin.setStatus(Status.RUNNING);
+        this.pluginService.save(plugin);
     }
+
+
 }

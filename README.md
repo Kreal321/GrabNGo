@@ -4,6 +4,9 @@ GrabNGo is a tool designed for automation of your alist, with added integration 
 ---
 
 ## Version Changes
+### Dev 0.0.2
+- Added support for AList API
+
 ### Dev 0.0.1
 - Initial setup: Spring Boot 2.7
 - Added Settings Page

@@ -11,6 +11,7 @@ import { MdbRippleModule } from "mdb-angular-ui-kit/ripple";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
 import { MdbTooltipModule } from "mdb-angular-ui-kit/tooltip";
+import { ModalAlistSettingsComponent } from './components/modal-alist-settings/modal-alist-settings.component';
 
 
 
@@ -18,7 +19,8 @@ import { MdbTooltipModule } from "mdb-angular-ui-kit/tooltip";
   declarations: [
     PageSettingsComponent,
     CardPluginSettingsComponent,
-    ModalProwlarrSettingsComponent
+    ModalProwlarrSettingsComponent,
+    ModalAlistSettingsComponent
   ],
   imports: [
     CommonModule,

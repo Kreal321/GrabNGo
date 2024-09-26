@@ -1,7 +1,6 @@
 package com.kasonxu.grabngo.service;
 
 import com.kasonxu.grabngo.domain.Plugin;
-import com.kasonxu.grabngo.dto.prowlarr.ProwlarrSystemStatus;
 import com.kasonxu.grabngo.dto.request.PluginUpdateRequest;
 import com.kasonxu.grabngo.exception.BadRequestException;
 import com.kasonxu.grabngo.util.enums.Status;
@@ -14,11 +13,13 @@ import java.util.List;
 public class SettingsService {
     private final PluginService pluginService;
     private final ProwlarrService prowlarrService;
+    private final AListService aListService;
 
     @Autowired
-    public SettingsService(PluginService pluginService, ProwlarrService prowlarrService) {
+    public SettingsService(PluginService pluginService, ProwlarrService prowlarrService, AListService aListService) {
         this.pluginService = pluginService;
         this.prowlarrService = prowlarrService;
+        this.aListService = aListService;
     }
 
     public List<Plugin> getPlugins() {
@@ -43,8 +44,14 @@ public class SettingsService {
                 plugin.setToken(pluginRequest.token());
                 this.prowlarrService.verifyPlugin();
                 break;
+            case "AList":
+                plugin.setUrl(pluginRequest.url());
+                plugin.setUsername(pluginRequest.username());
+                plugin.setPassword(pluginRequest.password());
+                this.aListService.verifyAndRefreshToken();
+                break;
             default:
-                throw new BadRequestException("Plugin not supported");
+                throw new BadRequestException("Plugin " + name + " not supported");
         }
 
 
@@ -54,7 +61,16 @@ public class SettingsService {
         Plugin plugin = this.pluginService.findByName(name)
                 .orElseThrow(() -> new BadRequestException("Plugin not found"));
         if (trigger.equals("on")) {
-            this.prowlarrService.verifyPlugin();
+            switch (name) {
+                case "Prowlarr":
+                    this.prowlarrService.verifyPlugin();
+                    break;
+                case "AList":
+                    this.aListService.verifyAndRefreshToken();
+                    break;
+                default:
+                    throw new BadRequestException("Plugin " + name + " not supported");
+            }
             return "Plugin " + name + " started";
         } else if (trigger.equals("off")) {
             plugin.setStatus(Status.STOPPED);
