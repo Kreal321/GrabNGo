@@ -41,6 +41,3 @@ testem.log
 .DS_Store
 Thumbs.db
 
-# Cache files
-cache/
-target/

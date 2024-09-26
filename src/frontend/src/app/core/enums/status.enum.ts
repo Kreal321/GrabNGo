@@ -1,0 +1,7 @@
+export enum Status {
+  RUNNING = 'RUNNING',
+  STOPPED = 'STOPPED',
+  ERROR = 'ERROR',
+  DISABLED = 'DISABLED',
+  VERIFYING = 'VERIFYING',
+}

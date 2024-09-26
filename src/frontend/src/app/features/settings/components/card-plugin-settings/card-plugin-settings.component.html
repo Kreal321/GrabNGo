@@ -1,0 +1,35 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Plugins</h5>
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">URL</th>
+          <th scope="col">Status</th>
+          <th scope="col" class="text-right">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plugin of plugins">
+          <th scope="row">{{plugin?.name}}</th>
+          <td>{{plugin?.url}}</td>
+          <td>
+            <app-badge-status [status]="plugin?.status"></app-badge-status>
+          </td>
+          <td class="text-right">
+            <button type="button" class="btn btn-primary btn-floating me-2" (click)="openPluginConfig(plugin)">
+              <i class="fas fa-pen"></i>
+            </button>
+            <button type="button" class="btn btn-success btn-floating" *ngIf="plugin.status === Status.STOPPED">
+              <i class="far fa-play-circle"></i>
+            </button>
+            <button type="button" class="btn btn-danger btn-floating" *ngIf="plugin.status === Status.RUNNING">
+              <i class="fas fa-ban"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
