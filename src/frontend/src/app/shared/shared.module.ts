@@ -8,12 +8,14 @@ import { TranslateModule } from "@ngx-translate/core";
 import { StatusStrPipe } from "./pipes/statusStr.pipe";
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { FileSizePipe } from "./pipes/fileSize.pipe";
 
 
 
 @NgModule({
   declarations: [
     StatusStrPipe,
+    FileSizePipe,
     BadgeStatusComponent,
     AlertComponent,
   ],
@@ -26,6 +28,7 @@ import { AlertComponent } from './components/alert/alert.component';
   ],
   exports: [
     StatusStrPipe,
+    FileSizePipe,
     BadgeStatusComponent
   ]
 })

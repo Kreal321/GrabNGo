@@ -1,7 +1,6 @@
 package com.kasonxu.grabngo.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kasonxu.grabngo.domain.Plugin;
 import com.kasonxu.grabngo.dto.alist.AListLoginRequest;
@@ -18,32 +17,18 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.http.HttpResponse;
-
 
 @Service
-public class AListService {
-    private final RestTemplate restTemplate;
-    private final PluginService pluginService;
+public class AListService extends PluginAbstractClass{
 
     @Autowired
     public AListService(RestTemplate restTemplate, PluginService pluginService) {
-        this.restTemplate = restTemplate;
-        this.pluginService = pluginService;
+        super(restTemplate, pluginService, "AList");
     }
 
-    private Plugin getConfig() {
-        Plugin config = this.pluginService.findByName("AList").orElseThrow(
-                () -> new BadRequestException("AList plugin not found")
-        );
-        if (config.getStatus() == Status.ERROR) {
-            throw new BadRequestException("AList plugin configuration error");
-        }
-        return config;
-    }
-
-    public void verifyAndRefreshToken() {
-        Plugin plugin = this.getConfig();
+    @Override
+    public void verifyAndConnect() {
+        Plugin plugin = this.getPlugin();
         plugin.setStatus(Status.VERIFYING);
         this.pluginService.save(plugin);
         UriComponents uri = UriComponentsBuilder.fromHttpUrl(plugin.getUrl() + "/api/auth/login")
@@ -71,7 +56,7 @@ public class AListService {
             if (!"2".equals(response.getData().get("role"))) {
                 throw new BadRequestException("AList user is not an admin");
             }
-            plugin.setStatus(Status.RUNNING);
+            plugin.setStatus(Status.CONNECTED);
             this.pluginService.save(plugin);
         } catch (JsonProcessingException e) {
             throw new BadRequestException("AList connection error, cannot get user info.");

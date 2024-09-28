@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProwlarrService } from "../../../../core/services/prowlarr.service";
 
 @Component({
   selector: 'app-page-home',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./page-home.component.css']
 })
 export class PageHomeComponent {
+
 
 }

@@ -42,13 +42,13 @@ public class SettingsService {
             case "Prowlarr":
                 plugin.setUrl(pluginRequest.url());
                 plugin.setToken(pluginRequest.token());
-                this.prowlarrService.verifyPlugin();
+                this.prowlarrService.verifyAndConnect();
                 break;
             case "AList":
                 plugin.setUrl(pluginRequest.url());
                 plugin.setUsername(pluginRequest.username());
                 plugin.setPassword(pluginRequest.password());
-                this.aListService.verifyAndRefreshToken();
+                this.aListService.verifyAndConnect();
                 break;
             default:
                 throw new BadRequestException("Plugin " + name + " not supported");
@@ -63,17 +63,17 @@ public class SettingsService {
         if (trigger.equals("on")) {
             switch (name) {
                 case "Prowlarr":
-                    this.prowlarrService.verifyPlugin();
+                    this.prowlarrService.verifyAndConnect();
                     break;
                 case "AList":
-                    this.aListService.verifyAndRefreshToken();
+                    this.aListService.verifyAndConnect();
                     break;
                 default:
                     throw new BadRequestException("Plugin " + name + " not supported");
             }
             return "Plugin " + name + " started";
         } else if (trigger.equals("off")) {
-            plugin.setStatus(Status.STOPPED);
+            plugin.setStatus(Status.NOT_CONNECTED);
             this.pluginService.save(plugin);
             return "Plugin " + name + " stopped";
         } else {

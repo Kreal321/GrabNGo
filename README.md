@@ -4,6 +4,11 @@ GrabNGo is a tool designed for automation of your alist, with added integration 
 ---
 
 ## Version Changes
+### Dev 0.0.3
+- Meaningful Badges Status
+- Optimized plugin configuration
+- Add Search card for Prowlarr
+
 ### Dev 0.0.2
 - Added support for AList API
 

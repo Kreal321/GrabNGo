@@ -8,4 +8,6 @@ export interface Plugin {
   token: string;
   status: Status;
   message: string;
+  updated: Date;
+  created: Date;
 }

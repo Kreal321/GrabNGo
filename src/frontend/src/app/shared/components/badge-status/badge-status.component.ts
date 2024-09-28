@@ -20,14 +20,14 @@ export class BadgeStatusComponent implements OnChanges{
 
   private colorChange(): void {
     switch (this.status) {
-      case Status.RUNNING:
+      case Status.CONNECTED:
         this.color = 'success';
         break;
       case Status.ERROR:
         this.color = 'danger';
         break;
-      case Status.STOPPED:
-        this.color = 'secondary';
+      case Status.NOT_CONNECTED:
+        this.color = 'warning';
         break;
       case Status.DISABLED:
         this.color = 'secondary';

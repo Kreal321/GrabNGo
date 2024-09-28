@@ -14,4 +14,5 @@ public class ProwlarrSearchResult {
     private int age;
     private long size;
     private String indexer;
+    private boolean suggested;
 }

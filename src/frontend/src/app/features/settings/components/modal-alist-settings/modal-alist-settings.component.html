@@ -35,8 +35,8 @@
           <button type="button" class="btn btn-outline-primary btn-block">Test</button>
         </div>
         <div class="col-6 ps-2">
-          <button mdbRipple type="button" class="btn btn-danger btn-block" *ngIf="alist.status === Status.RUNNING" (click)="triggerPlugin('off')">Disable</button>
-          <button mdbRipple type="button" class="btn btn-success btn-block" *ngIf="alist.status !== Status.RUNNING" (click)="triggerPlugin('on')">Enable</button>
+          <button mdbRipple type="button" class="btn btn-danger btn-block" *ngIf="alist.status === Status.CONNECTED" (click)="triggerPlugin('off')">Disable</button>
+          <button mdbRipple type="button" class="btn btn-success btn-block" *ngIf="alist.status !== Status.CONNECTED" (click)="triggerPlugin('on')">Enable</button>
         </div>
       </div>
       <button mdbRipple type="button" class="btn btn-primary btn-block my-1" (click)="updateSettings()">Save</button>

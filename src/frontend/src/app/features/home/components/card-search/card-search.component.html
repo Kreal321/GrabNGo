@@ -1,0 +1,58 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Indexer Search</h5>
+    <div class="d-flex my-3">
+      <mdb-form-control class="flex-grow-1">
+        <input mdbInput type="text" id="query" class="form-control" [(ngModel)]="query"/>
+        <label mdbLabel class="form-label" for="query">Query</label>
+      </mdb-form-control>
+      <button class="input-group-text border-0" (click)="search()"><i class="fas fa-search" id="mdb-5-search-icon"></i></button>
+    </div>
+    <div class="datatable my-4" *ngIf="showSearchResult">
+      <table
+        class="table datatable-table"
+        mdbTable
+        mdbTableSort
+        #table="mdbTable"
+        #sort="mdbTableSort"
+        [dataSource]="data"
+        [pagination]="pagination"
+        [sort]="sort"
+        [hover]="true"
+      >
+        <thead class="datatable-header">
+          <tr>
+            <th *ngFor="let header of headers" [mdbTableSortHeader]="header" scope="col">
+              {{ header | titlecase }}
+            </th>
+          </tr>
+        </thead>
+        <tbody class="datatable-body">
+          <tr *ngFor="let data of table.data" scope="row">
+            <td>
+              <span class="badge badge-primary align-text-top" *ngIf="data.suggested"><i class="fas fa-cube"></i></span> {{ data.title }}
+            </td>
+            <td>
+              {{ data.age }}
+            </td>
+            <td>
+              {{ data.size | fileSize }}
+            </td>
+            <td>
+              {{ data.indexer }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-container *ngIf="loading">
+        <div class="datatable-loader bg-light">
+              <span class="datatable-loader-inner">
+                <span class="datatable-progress bg-primary"></span>
+              </span>
+        </div>
+        <p class="text-center text-muted my-4">Loading results...</p>
+      </ng-container>
+      <mdb-table-pagination #pagination></mdb-table-pagination>
+    </div>
+  </div>
+</div>
