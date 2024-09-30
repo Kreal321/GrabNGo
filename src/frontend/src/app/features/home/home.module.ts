@@ -7,6 +7,9 @@ import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
 import { FormsModule } from "@angular/forms";
 import { MdbTableModule } from "mdb-angular-ui-kit/table";
 import { SharedModule } from "../../shared/shared.module";
+import { MdbTooltipModule } from "mdb-angular-ui-kit/tooltip";
+import { CardOfflineDownloadComponent } from './components/card-offline-download/card-offline-download.component';
+import { MdbSelectModule } from "mdb-angular-ui-kit/select";
 
 
 
@@ -14,6 +17,7 @@ import { SharedModule } from "../../shared/shared.module";
   declarations: [
     PageHomeComponent,
     CardSearchComponent,
+    CardOfflineDownloadComponent,
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,9 @@ import { SharedModule } from "../../shared/shared.module";
     MdbFormsModule,
     FormsModule,
     MdbTableModule,
-    SharedModule
+    SharedModule,
+    MdbTooltipModule,
+    MdbSelectModule
   ]
 })
 export class HomeModule { }

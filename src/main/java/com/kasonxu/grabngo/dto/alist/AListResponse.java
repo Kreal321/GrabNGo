@@ -13,5 +13,5 @@ import java.util.HashMap;
 public class AListResponse {
     private int code;
     private String message;
-    private HashMap<String, String> data;
+    private HashMap<String, Object> data;
 }

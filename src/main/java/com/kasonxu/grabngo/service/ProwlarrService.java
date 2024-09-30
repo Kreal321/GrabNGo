@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -64,6 +65,7 @@ public class ProwlarrService extends PluginAbstractClass {
                 }
                 result.setTitle(result.getTitle().replaceAll("(【.*\\.com.*】)", ""));
             }
+            Arrays.sort(results, Comparator.comparingInt(ProwlarrSearchResult::getAge));
             Arrays.sort(results, (a, b) -> Boolean.compare(b.isSuggested(), a.isSuggested()));
         }
         return results;

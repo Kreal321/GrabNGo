@@ -4,6 +4,11 @@ GrabNGo is a tool designed for automation of your alist, with added integration 
 ---
 
 ## Version Changes
+### Dev 0.0.4
+- Added offline download support for Prowlarr search results
+- Offline download settings
+- Offline download support for 115 drive
+
 ### Dev 0.0.3
 - Meaningful Badges Status
 - Optimized plugin configuration

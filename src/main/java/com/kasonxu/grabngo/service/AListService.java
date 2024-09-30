@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kasonxu.grabngo.domain.Plugin;
 import com.kasonxu.grabngo.dto.alist.AListLoginRequest;
 import com.kasonxu.grabngo.dto.alist.AListResponse;
+import com.kasonxu.grabngo.dto.alist.OfflineDownloadRequest;
 import com.kasonxu.grabngo.exception.BadRequestException;
 import com.kasonxu.grabngo.util.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class AListService extends PluginAbstractClass{
         if (response.getCode() != 200|| response.getData() == null) {
             throw new BadRequestException("AList connection error: " + response.getMessage());
         }
-        plugin.setToken(response.getData().get("token"));
+        plugin.setToken((String) response.getData().get("token"));
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", plugin.getToken());
@@ -53,7 +54,7 @@ public class AListService extends PluginAbstractClass{
             if (resp.getStatusCode().isError()) {
                 throw new BadRequestException("AList config error: " + response.getMessage());
             }
-            if (!"2".equals(response.getData().get("role"))) {
+            if ((int) response.getData().get("role") != 2) {
                 throw new BadRequestException("AList user is not an admin");
             }
             plugin.setStatus(Status.CONNECTED);
@@ -62,5 +63,32 @@ public class AListService extends PluginAbstractClass{
             throw new BadRequestException("AList connection error, cannot get user info.");
         }
 
+    }
+
+    public String offline_download(OfflineDownloadRequest body) {
+        Plugin plugin = this.getConnectedPlugin();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", plugin.getToken());
+        headers.set("Content-Type", "application/json");
+        headers.set("Accept", "application/json");
+
+        ResponseEntity<String> resp = restTemplate.exchange(plugin.getUrl() + "/api/fs/add_offline_download", HttpMethod.POST, new HttpEntity<>(body, headers), String.class);
+        System.out.println(resp.getBody());
+        try {
+            AListResponse response = new ObjectMapper().readValue(resp.getBody(), AListResponse.class);
+            if (resp.getStatusCode().isError()) {
+                throw new BadRequestException("AList config error: " + response.getMessage());
+            }
+            if (!"success".equals(response.getMessage())) {
+                plugin.setStatus(Status.ERROR);
+                this.pluginService.save(plugin);
+                throw new BadRequestException("AList offline download error: " + response.getMessage());
+            }
+        } catch (JsonProcessingException e) {
+            plugin.setStatus(Status.ERROR);
+            this.pluginService.save(plugin);
+            throw new BadRequestException("AList connection error, cannot create offline download task.");
+        }
+        return resp.getBody();
     }
 }

@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Offline Download</h5>
+    <div class="d-flex input-group my-3">
+      <mdb-form-control class="flex-grow-1">
+        <input mdbInput type="text" id="path" class="form-control" [(ngModel)]="path"/>
+        <label mdbLabel class="form-label" for="path">Path</label>
+      </mdb-form-control>
+      <mdb-form-control>
+        <mdb-select [value]="'115'">
+          <mdb-option [value]="'115'">115</mdb-option>
+          <mdb-option [value]="'pikpak'" [disabled]="true">Pikpak</mdb-option>
+        </mdb-select>
+        <label mdbLabel class="form-label">Downloader</label>
+      </mdb-form-control>
+      <button class="btn btn-primary" (click)="setPath()">Save</button>
+    </div>
+  </div>
+</div>
