@@ -5,6 +5,7 @@ import com.kasonxu.grabngo.dto.request.PluginUpdateRequest;
 import com.kasonxu.grabngo.exception.BadRequestException;
 import com.kasonxu.grabngo.util.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,12 +15,14 @@ public class SettingsService {
     private final PluginService pluginService;
     private final ProwlarrService prowlarrService;
     private final AListService aListService;
+    private final TMDBService tmdbService;
 
     @Autowired
-    public SettingsService(PluginService pluginService, ProwlarrService prowlarrService, AListService aListService) {
-        this.pluginService = pluginService;
+    public SettingsService(ProwlarrService prowlarrService, AListService aListService, TMDBService tmdbService, PluginService pluginService) {
         this.prowlarrService = prowlarrService;
         this.aListService = aListService;
+        this.tmdbService = tmdbService;
+        this.pluginService = pluginService;
     }
 
     public List<Plugin> getPlugins() {
@@ -50,6 +53,11 @@ public class SettingsService {
                 plugin.setPassword(pluginRequest.password());
                 this.aListService.verifyAndConnect();
                 break;
+            case "TMDB":
+                plugin.setUrl(pluginRequest.url());
+                plugin.setToken(pluginRequest.token());
+                this.tmdbService.verifyAndConnect();
+                break;
             default:
                 throw new BadRequestException("Plugin " + name + " not supported");
         }
@@ -67,6 +75,9 @@ public class SettingsService {
                     break;
                 case "AList":
                     this.aListService.verifyAndConnect();
+                    break;
+                case "TMDB":
+                    this.tmdbService.verifyAndConnect();
                     break;
                 default:
                     throw new BadRequestException("Plugin " + name + " not supported");

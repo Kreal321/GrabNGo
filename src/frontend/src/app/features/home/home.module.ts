@@ -10,6 +10,9 @@ import { SharedModule } from "../../shared/shared.module";
 import { MdbTooltipModule } from "mdb-angular-ui-kit/tooltip";
 import { CardOfflineDownloadComponent } from './components/card-offline-download/card-offline-download.component';
 import { MdbSelectModule } from "mdb-angular-ui-kit/select";
+import { SectionMoviePosterWallComponent } from './components/section-movie-poster-wall/section-movie-poster-wall.component';
+import { MdbInfiniteScrollModule } from "mdb-angular-ui-kit/infinite-scroll";
+import { MdbScrollbarModule } from "mdb-angular-ui-kit/scrollbar";
 
 
 
@@ -18,6 +21,7 @@ import { MdbSelectModule } from "mdb-angular-ui-kit/select";
     PageHomeComponent,
     CardSearchComponent,
     CardOfflineDownloadComponent,
+    SectionMoviePosterWallComponent,
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { MdbSelectModule } from "mdb-angular-ui-kit/select";
     MdbTableModule,
     SharedModule,
     MdbTooltipModule,
-    MdbSelectModule
+    MdbSelectModule,
+    MdbInfiniteScrollModule,
+    MdbScrollbarModule
   ]
 })
 export class HomeModule { }

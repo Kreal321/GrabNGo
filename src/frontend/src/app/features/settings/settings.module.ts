@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MdbFormsModule } from "mdb-angular-ui-kit/forms";
 import { MdbTooltipModule } from "mdb-angular-ui-kit/tooltip";
 import { ModalAlistSettingsComponent } from './components/modal-alist-settings/modal-alist-settings.component';
+import { ModalTmdbSettingsComponent } from './components/modal-tmdb-settings/modal-tmdb-settings.component';
 
 
 
@@ -20,7 +21,8 @@ import { ModalAlistSettingsComponent } from './components/modal-alist-settings/m
     PageSettingsComponent,
     CardPluginSettingsComponent,
     ModalProwlarrSettingsComponent,
-    ModalAlistSettingsComponent
+    ModalAlistSettingsComponent,
+    ModalTmdbSettingsComponent
   ],
   imports: [
     CommonModule,

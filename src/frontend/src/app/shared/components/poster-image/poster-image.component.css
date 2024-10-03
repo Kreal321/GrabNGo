@@ -1,0 +1,8 @@
+.mask-text-secondary {
+  background: linear-gradient(0deg, rgba(101,101,105,0.8217787114845938) 5%, rgba(255,255,255,0) 30%);
+}
+.image-absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

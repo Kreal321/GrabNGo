@@ -4,6 +4,12 @@ GrabNGo is a tool designed for automation of your alist, with added integration 
 ---
 
 ## Version Changes
+### Dev 0.0.5
+- TMDB API Integration
+- Movie Poster Wall - Infinite Scroll
+- Localized the project: `en-US` and `ch-ZH`
+
+
 ### Dev 0.0.4
 - Added offline download support for Prowlarr search results
 - Offline download settings

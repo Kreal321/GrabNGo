@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
@@ -9,6 +9,7 @@ import { StatusStrPipe } from "./pipes/statusStr.pipe";
 import { BadgeStatusComponent } from './components/badge-status/badge-status.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { FileSizePipe } from "./pipes/fileSize.pipe";
+import { PosterImageComponent } from './components/poster-image/poster-image.component';
 
 
 
@@ -18,6 +19,7 @@ import { FileSizePipe } from "./pipes/fileSize.pipe";
     FileSizePipe,
     BadgeStatusComponent,
     AlertComponent,
+    PosterImageComponent,
   ],
   imports: [
     CommonModule,
@@ -25,11 +27,13 @@ import { FileSizePipe } from "./pipes/fileSize.pipe";
     MdbCollapseModule,
     MdbDropdownModule,
     TranslateModule,
+    NgOptimizedImage,
   ],
   exports: [
     StatusStrPipe,
     FileSizePipe,
-    BadgeStatusComponent
+    BadgeStatusComponent,
+    PosterImageComponent
   ]
 })
 export class SharedModule { }

@@ -33,20 +33,20 @@
               mdbDropdownToggle
               aria-expanded="false"
             >
-              <span *ngIf="translate.currentLang == 'zh'"><i class="flag-china flag m-0"></i> 中文</span>
-              <span *ngIf="translate.currentLang == 'en'"><i class="flag-united-kingdom flag m-0"></i> English</span>
+              <span *ngIf="translate.currentLang == 'zh-CN'"><i class="flag-china flag m-0"></i> 中文</span>
+              <span *ngIf="translate.currentLang == 'en-US'"><i class="flag-united-kingdom flag m-0"></i> English</span>
             </a>
             <ul mdbDropdownMenu class="dropdown-menu dropdown-menu-sm-end" aria-labelledby="navbarLanguageDropdown">
               <li>
-                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('zh')">
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('zh-CN')">
                   <i class="flag-china flag"></i> 中文
-                  <i class="fa fa-check text-success ms-2" *ngIf="translate.currentLang == 'zh'"></i>
+                  <i class="fa fa-check text-success ms-2" *ngIf="translate.currentLang == 'zh-CN'"></i>
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
+                <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en-US')">
                   <i class="flag-united-kingdom flag"></i> English
-                  <i class="fa fa-check text-success ms-2" *ngIf="translate.currentLang == 'en'"></i>
+                  <i class="fa fa-check text-success ms-2" *ngIf="translate.currentLang == 'en-US'"></i>
                 </a>
               </li>
             </ul>

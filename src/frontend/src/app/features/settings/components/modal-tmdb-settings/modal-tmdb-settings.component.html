@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between my-1">
+      <h5 class="card-title mb-1">TMDB <app-badge-status class="text-right" [status]="tmdb.status"></app-badge-status></h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <p class="card-text mb-4">{{tmdb.message}}</p>
+    <form>
+      <mdb-form-control class="mb-4">
+        <input mdbInput type="url" id="url" class="form-control" [(ngModel)]="tmdb.url" [ngModelOptions]="{standalone: true}" [disabled]="true"/>
+        <label mdbLabel class="form-label" for="url">URL</label>
+      </mdb-form-control>
+
+      <mdb-form-control>
+        <input mdbInput type="password" id="token" class="form-control" [(ngModel)]="tmdb.token" [ngModelOptions]="{standalone: true}"/>
+        <label mdbLabel class="form-label" for="token">API Token</label>
+      </mdb-form-control>
+      <div class="mb-4 form-text">
+        Location: <code>Settings > API > API Key</code>
+      </div>
+
+      <div class="d-flex justify-content-between my-1">
+        <div class="col-6 pe-2">
+          <button type="button" class="btn btn-outline-primary btn-block">Test</button>
+        </div>
+        <div class="col-6 ps-2">
+          <button mdbRipple type="button" class="btn btn-danger btn-block" *ngIf="tmdb.status === Status.CONNECTED" (click)="triggerPlugin('off')">Disable</button>
+          <button mdbRipple type="button" class="btn btn-success btn-block" *ngIf="tmdb.status !== Status.CONNECTED" (click)="triggerPlugin('on')">Enable</button>
+        </div>
+      </div>
+      <button mdbRipple type="button" class="btn btn-primary btn-block my-1" (click)="updateSettings()">Save</button>
+    </form>
+  </div>
+</div>

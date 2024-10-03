@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.kasonxu</groupId>
     <artifactId>grabngo</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <name>Grab-N-Go</name>
     <description>
         GrabNGo is a tool designed for automation of your alist, with added integration for offline downloads using Prowlarr search results.

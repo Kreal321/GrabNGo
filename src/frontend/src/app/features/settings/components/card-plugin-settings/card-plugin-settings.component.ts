@@ -9,6 +9,7 @@ import { AlertComponent } from "../../../../shared/components/alert/alert.compon
 import { MdbNotificationRef, MdbNotificationService } from "mdb-angular-ui-kit/notification";
 import { DataResponse } from "../../../../core/models/dataResponse.model";
 import { ModalAlistSettingsComponent } from "../modal-alist-settings/modal-alist-settings.component";
+import { ModalTmdbSettingsComponent } from "../modal-tmdb-settings/modal-tmdb-settings.component";
 
 @Component({
   selector: 'app-card-plugin-settings',
@@ -82,6 +83,20 @@ export class CardPluginSettingsComponent implements OnChanges{
           ignoreBackdropClick: true,
           data: {
             alist: {...plugin}
+          }
+        }).onClose.subscribe((message: any) => {
+          if (message === 'updated') {
+            this.loadPlugins();
+          }
+        });
+        break;
+      case 'TMDB':
+        plugin.url = "https://api.themoviedb.org/3";
+        this.modalService.open(ModalTmdbSettingsComponent, {
+          modalClass: 'modal-dialog-centered',
+          ignoreBackdropClick: true,
+          data: {
+            tmdb: {...plugin}
           }
         }).onClose.subscribe((message: any) => {
           if (message === 'updated') {

@@ -1,0 +1,19 @@
+<div class="w-100" *ngIf="media">
+  <div class="bg-image shadow-4-soft rounded-6 overflow-hidden d-block" style="aspect-ratio: 2 / 3" data-mdb-ripple-init data-ripple-color="light">
+    <img src="./assets/images/poster_placeholder.png" class="w-100" alt=""/>
+    <img src="https://image.tmdb.org/t/p/w500{{media.poster_path}}" class="image-absolute w-100" alt=""/>
+    <a href="javascript:void(0)">
+      <div class="mask mask-text-secondary">
+        <div class="d-flex justify-content-start align-items-end h-100 p-3">
+          <div>
+            <span class="badge badge-secondary rounded-pill me-2">{{media.release_date}}</span>
+            <h6 class="card-title mt-2 text-light">{{media.title}}</h6>
+          </div>
+        </div>
+      </div>
+      <div class="hover-overlay">
+        <div class="mask" style="background-color: hsla(0, 0%, 98.4%, 0.09)"></div>
+      </div>
+    </a>
+  </div>
+</div>
